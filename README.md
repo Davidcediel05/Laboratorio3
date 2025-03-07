@@ -69,8 +69,9 @@ La relación señal-ruido es una métrica fundamental en el procesamiento de se�
 La formula general para calcular el SNR en Decibelios (dB) es:
 
 Donde:
--Pseñal es la potencia de la señal.
--Pruido es la potencia del ruido.
+
+- Pseñal es la potencia de la señal.
+- Pruido es la potencia del ruido.
 
     
 </p>
