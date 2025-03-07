@@ -7,11 +7,6 @@ audio de cada una de las voces capturadas.
   
 </p>  
 
-#### Frecuencia de muestreo.
-<p>
-Es la cantidad de muestras tomadas por unidad de tiempo, para convertir una señal análoga a digital. En audio la frecuencia de muestreo determina la precisión del audio digital.
-Según el teorema de Nyquist, la frecuencia de muestreo debe ser al menos el doble de la frecuencia más alta contenida en la señal original. Dado que el oído humano puede percibir sonidos en un rango de 20 Hz a 20.000 Hz, se requiere una frecuencia de muestreo mínima de 40.000 Hz para capturar. para este laboratorio seleccionamos la frecuencia estandar de 44.1 kHz que cumple el teorema de nyquist, esta frecuencia es superior al doble de la frecuencia maxima audible de 20kHz. 
-</p>
 
 ### Procedimiento.
 <p>
@@ -23,10 +18,30 @@ Para realizar este laboratorio es necesario utilizar metodos matematicos que nos
 ![image](https://github.com/user-attachments/assets/b1d5f438-ea70-4d00-8c54-5c6f74fe1846)
 
 
+</p>
+
+ ### Relacion señal-ruido
+<p>
+La relación señal-ruido es una métrica fundamental en el procesamiento de señales, puesto que permite evaluar la calidad de una señal en presencia de ruido, esta medida  compara la potencia de la señal útil con la potencia del ruido presente en un sistema.
+La formula general para calcular el SNR en Decibelios (dB) es:
+  
+![image](https://github.com/user-attachments/assets/15e73e7e-f518-4bd5-b48d-7494a2e2c084)
+
+Donde:
+
+- Pseñal es la potencia de la señal.
+- Pruido es la potencia del ruido.
 
 </p>
 
- 
+#### Frecuencia de muestreo.
+<p>
+Es la cantidad de muestras tomadas por unidad de tiempo, para convertir una señal análoga a digital. En audio la frecuencia de muestreo determina la precisión del audio digital.
+Según el teorema de Nyquist, la frecuencia de muestreo debe ser al menos el doble de la frecuencia más alta contenida en la señal original. Dado que el oído humano puede percibir sonidos en un rango de 20 Hz a 20.000 Hz, se requiere una frecuencia de muestreo mínima de 40.000 Hz para capturar. para este laboratorio seleccionamos la frecuencia estandar de 44.1 kHz que cumple el teorema de nyquist, esta frecuencia es superior al doble de la frecuencia maxima audible de 20kHz. 
+
+![image](https://github.com/user-attachments/assets/c0f32c08-062f-40ae-9e01-c9c2f7dad579)
+</p>
+
 #### Transformada de Fourier.
 <P>
 Una transformacion es una operacion que convierte una señal desde un dominio a otro dominio, la transformada de fourier convierte una señal del dominio del tiempo hacie el dominio de la frecuencia. Lo cual permite analizar las señales en dominios alternativos lo cual permite identificar las caracteristicas como frecuencias.
@@ -84,18 +99,6 @@ ICA
 
 
 
-### Relacion señal-ruido
-<p>
-La relación señal-ruido es una métrica fundamental en el procesamiento de señales, puesto que permite evaluar la calidad de una señal en presencia de ruido, esta medida  compara la potencia de la señal útil con la potencia del ruido presente en un sistema.
-La formula general para calcular el SNR en Decibelios (dB) es:
-
-Donde:
-
-- Pseñal es la potencia de la señal.
-- Pruido es la potencia del ruido.
-
-    
-</p>
 
 ### Requisitos
 <p>
