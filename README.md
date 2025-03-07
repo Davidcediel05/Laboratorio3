@@ -15,7 +15,7 @@ Según el teorema de Nyquist, la frecuencia de muestreo debe ser al menos el dob
 
 ### Procedimiento.
 <p>
-Para realizar este laboratorio es necesario utilizar metodos matematicos que nos permitan separar y analizar la señal, teniendo en cuenta que 
+Para realizar este laboratorio es necesario utilizar metodos matematicos que nos permitan analizar y separar la señal, teniendo en cuenta que son dos microfonos a 3 metros de distancia entre si y a 1.5 metros de donde proviene la voz, utilizaremos el analisis de componentes independientes para eliminar las interferencias entre las voces, la tecnica de Beamforing que mejora la calidad de la señal en un entorno ruidoso y  para el analisis usamos las transformadas de furier. 
 </p>
 
  
