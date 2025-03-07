@@ -31,6 +31,7 @@ La transformada de Fourier descompone la señal en componentes de frecuencia par
     frequencies = fftfreq(N, Ts)
     spectrum = np.abs(fft(signal, axis=0))
     return frequencies, spectrum`
+    
 #### Transformada rapida de Fourier.
 
 <P>
@@ -59,8 +60,11 @@ La PSD muestra un pico máximo por debajo de 50 Hz y se va disminuyendo progresi
 ### Metodos de separacion de fuentes.
 
 <p>
-Para este laboratorio utilizamos el analisis de componentes independiente con el cual separa señales mezcladas en multiples fuentes independientes. el cual usa la tecnica matematica FastICA (optimizacion basada en independencia estadistica), a la salida podemos observar varias señales separadas, donde se observa que corresponde a cada fuente distinta. 
-BEAMFORMING (Singular Value Descomposition) su funcion es mejorar la calida de una señal especifica en presencia de ruido, Analiza valores aplicados a matrices de señales. a la salida se observa una señal optimizada con mejor (SNR).
+  
+Para este laboratorio utilizamos:
+-El analisis de componentes independiente (ICA): Este metodo separa señales mezcladas en multiples fuentes independientes. el cual usa la tecnica matematica FastICA (optimizacion basada en independencia estadistica), a la salida podemos observar varias señales separadas, donde se observa que corresponde a cada fuente distinta. 
+-Singular Value Descomposition (BEAMFORMING): Su funcion es mejorar la calida de una señal especifica en presencia de ruido, Analiza valores aplicados a matrices de señales. a la salida se observa una señal optimizada con mejor (SNR).
+
 </p>
 
 
@@ -74,25 +78,28 @@ La relación señal-ruido es una métrica fundamental en el procesamiento de se�
 ### Requisitos
 <p>
 Para ejecutar el código, es necesario instalar Python e importar las siguientes librerías:
-  
-- sklearn.decomposition.FastICA: separa las fuentes de audio mezcladas.  
-- numpy: permite realizar operaciones matemáticas eficientes en matrices y arreglos.
-- matplotlib: biblioteca estándar para crear visualizaciones.
-- scipy: funciones para el diseño y aplicación de filtros.
-- pyroomacoustics.Beamformer: enfoca la captura de audio en una direccion especifica. 
+
+- import librosa
+- import numpy as np
+- import matplotlib,pyplot as plt
+- import soundfile as sf
+- from colorama import Fore, init
+- import shutil
+- from sklearn.descomposition import
+- FastICA
   
 Tener instalado un compilador, que para este caso se utilizo spyder.  
 </p>
 
 ### Estructura del proyecto
-- load_signal(): Carga y procesamiento de la señal.
-- compute_statistics(): Analisis estadistico.
+
 - tfourier(): Transformada de fourier.
-- _psd(): Densidad espectral.
-- plot_signals(),plot_fourier(), plot_psd(),plot_histogram(): visualizacion.
-- Lab2.py: Lee y visualiza la señal ECG desde un archivo
-- LABfinal.py: Versión optimizada del procesamiento de señales ECG.  
 - 01.dat y 01.hea: Archivos de datos de la señal EMG.
+- sklearn.decomposition.FastICA: separa las fuentes de audio mezcladas.  
+- numpy: permite realizar operaciones matemáticas eficientes en matrices y arreglos.
+- matplotlib: biblioteca estándar para crear visualizaciones.
+- scipy: funciones para el diseño y aplicación de filtros.
+- pyroomacoustics.Beamformer: enfoca la captura de audio en una direccion especifica. 
 
 
 ### Ejecución
