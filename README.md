@@ -16,6 +16,14 @@ Según el teorema de Nyquist, la frecuencia de muestreo debe ser al menos el dob
 ### Procedimiento.
 <p>
 Para realizar este laboratorio es necesario utilizar metodos matematicos que nos permitan analizar y separar la señal, teniendo en cuenta que son dos microfonos a 3 metros de distancia entre si y a 1.5 metros de donde proviene la voz, utilizaremos el analisis de componentes independientes para eliminar las interferencias entre las voces, la tecnica de Beamforing que mejora la calidad de la señal en un entorno ruidoso y  para el analisis usamos las transformadas de furier. 
+
+![image](https://github.com/user-attachments/assets/e8ce2271-451f-46d8-9f16-cda9e2514b6f)
+![image](https://github.com/user-attachments/assets/15929288-a337-4320-8857-eb3b36093d80)
+![image](https://github.com/user-attachments/assets/e648a271-34e9-4348-b478-4c9c8f7f74c9)
+![image](https://github.com/user-attachments/assets/b1d5f438-ea70-4d00-8c54-5c6f74fe1846)
+
+
+
 </p>
 
  
@@ -38,9 +46,12 @@ Aplicación. La Transformada Rápida de Fourier (FFT) procesa una señal de audi
 
 Mide la distribucion de energia de la señal en funcion de la frecuencia. se espera que nos muestre la contribucion de mas frecuencias en la señal.
 
-![PSD](https://github.com/user-attachments/assets/6cf1c39a-3479-45b4-8c7d-7a4d0827176b)
+![image](https://github.com/user-attachments/assets/3003a4f3-d27c-49f3-8ec8-e4eed159857c)
+![image](https://github.com/user-attachments/assets/bdb36bcf-adaf-4599-804f-ea88ede95df8)
+![image](https://github.com/user-attachments/assets/a0bd1be3-d302-4f52-9d2a-64f390d6ca54)
+![image](https://github.com/user-attachments/assets/52c23999-a88e-46bc-a20b-cc1a525f3ab8)
 
-La PSD muestra un pico máximo por debajo de 50 Hz y se va disminuyendo progresivamente, lo cual indica que es coherente para un ECG. En caso de que hubiera aumentado en altas frecuencias podría indicar que hay presencia de ruido
+
 
 **Implementación en el Código:**
     `def compute_psd(signal, Fs):
@@ -58,6 +69,16 @@ La PSD muestra un pico máximo por debajo de 50 Hz y se va disminuyendo progresi
 Para este laboratorio utilizamos:
 -El analisis de componentes independiente (ICA): Este metodo separa señales mezcladas en multiples fuentes independientes. el cual usa la tecnica matematica FastICA (optimizacion basada en independencia estadistica), a la salida podemos observar varias señales separadas, donde se observa que corresponde a cada fuente distinta. 
 -Singular Value Descomposition (BEAMFORMING): Su funcion es mejorar la calida de una señal especifica en presencia de ruido, Analiza valores aplicados a matrices de señales. a la salida se observa una señal optimizada con mejor (SNR). En el entorno del laboratorio este metodo permite enfocar la captura de audio hacia una fuente especifica.
+
+Beamforming
+![image](https://github.com/user-attachments/assets/d0fed6f2-efcb-499e-ac92-c42f157d2122)
+![image](https://github.com/user-attachments/assets/ecc4de1a-0d69-4a1b-b8f3-95ef3c830b51)
+
+ICA
+![image](https://github.com/user-attachments/assets/eebb1aec-cdd8-470c-a910-390d56ebab91)
+![image](https://github.com/user-attachments/assets/1efd8f4d-a114-457d-8504-e972bf300e54)
+
+
 
 </p>
 
