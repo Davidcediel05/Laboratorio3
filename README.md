@@ -7,63 +7,13 @@ audio de cada una de las voces capturadas.
   
 </p>
 
-#### Convolucion
-<p>
-La convolución es una operación matemática que combina dos funciones para describir la superposición entre ambas. En el procesamiento de señales se emplea para conocer que le sucede a una señal despues de pasar por un determinado dispositivo, detectan patrones que despues clasifican.
-La convolucion define como un sistema modifica su señal de entrada utilizando su respuesta al impulso, es muy util para observar los sistemas lineales e invariantes en el tiempo. su principal funcion es combinar señales para describir sistemas. 
-   
-   - Para la funcion X (n)=[1,0,0,0,9,7,1,3,6,4] y H(n)=[5,6,0,0,6,1,6]
-
-![convolucion](https://github.com/user-attachments/assets/e805c1e4-1338-4bb0-a83e-253e18b22434)
-![image](https://github.com/user-attachments/assets/f3854a79-c290-470d-8498-688884937d94)
-![image](https://github.com/user-attachments/assets/c94812bc-a9ba-4021-bc34-b5553adeb9d0)
-
-   - Para la funcion  X(n)=[1,0,2,5,4,6,1,2,4,5] y H(n)=[5,6,0,0,6,1,1].
-
-![convolucion](https://github.com/user-attachments/assets/fbf02378-4bff-4958-9f1c-56d1ae458709)
-![convolucion a mano](https://github.com/user-attachments/assets/df538c97-d4b2-42da-b779-d0d6c04b8592)
-![image](https://github.com/user-attachments/assets/49a80bf7-a9ca-4e20-9552-2b931b2d83ba)
-
-Se puede observar las gráficas de convolución tanto con los datos del colaborador Juan David Cediel y Juan Yael Barriga, a continuación, se explicará que significa cada grafica.
-
-- **Primera gráfica (Señal x[n]):**
-Se puede visualizar una señal de entrada que tiene valores discretos en ciertos puntos, son valores significativos en ciertas posiciones, se puede inferir que la señal no presenta una uniformidad y por lo tanto no es periódica
-- **Segunda gráfica (Señal h[n]):**
-Representa la respuesta al impulso del sistema, esta señal indica el sistema posee varios múltiples puntos en el tiempo
-- **Tercera gráfica(Convolución(x[n](h[n]x[n])( h[n]x[n])(h[n])):**
-Esta tercera grafica es la convolución entre las dos graficas, nos señala que la señal resultante tiene mayor cantidad de puntos con valores mas grandes, es decir, esta grafica es el resultado muestra como la señal de entrada se ve afectada con la señal de salida.
-</p>
-
-#### Correlacion. 
-
-<p>
-La correlacion se encarga de medir la similitud entre señales, indica que tanto se parece una señal a la otra mientras una se desplaza respecto a la otra.
-Hay dos tipos de correlacion.
-
--Autocorrelacion: Mide la periodicidad de una señal por lo tanto es la correlacion de una señal consigo misma.
-
--Correlacion cruzada: Se encarga de medir similitudes entre señales diferentes.
-
-![correlacion](https://github.com/user-attachments/assets/7aab1564-8a08-4425-a7a5-9ce1ad945e74)
-
-En la gráfica de correlación, podemos observar picos que indican que las señales estan alineadas entre ellas. Si las señales son independientes, la correlación debería ser baja en todos los puntos.
-
-</p>
-
 
 **Implementación en el Código:**
-
-   `def compute_correlation(x1, x2):
-    return np.correlate(x1, x2, mode='full')`
     
 
-#### Señal en el tiempo.
-
-![image](https://github.com/user-attachments/assets/be8fa0cc-e944-441b-a4ff-54e7b4940d6a)
-
-<p>
-Por parte de la señal en el tiempo se trata de una señal de ECG que muestra su evolución en función del tiempo en la cual podemos ver el ciclo cardiaco en dos diferentes canales, se puede observar picos regulares y patrones repetitivos, sin embargo la gráfica presenta cierta alteración en su forma que podemos indicar ruido
-</p>
+#### Frecuencia de muestreo.
+Es la cantidad de muestras tomadas por unidad de tiempo, para convertir una señal análoga a digital. 
+En audio la frecuencia de muestreo determina la precisión del audio digital.
 
 #### Transformada de Fourier.
 <P>
@@ -81,6 +31,13 @@ La transformada de Fourier descompone la señal en componentes de frecuencia par
     frequencies = fftfreq(N, Ts)
     spectrum = np.abs(fft(signal, axis=0))
     return frequencies, spectrum`
+#### Transformada rapida de Fourier.
+
+<P>
+Esta transformación es una herramienta crucial para analizar y manipular el contenido espectral del audio, esto es fundamental para aplicaciones como la separación de fuentes.
+Aplicación. La Transformada Rápida de Fourier (FFT) procesa una señal de audio en el dominio del tiempo, donde se representa la amplitud de la onda sonora a lo largo del tiempo, y la transforma en el dominio de la frecuencia. Esto permite visualizar la intensidad de cada componente de frecuencia presente en la señal original, es decir, identificar qué frecuencias conforman el sonido. En el caso del laboratorio, donde se analizan dos fuentes con diferentes timbres de voz, la FFT permite reconocer los rangos de frecuencia característicos de cada tipo de voz, donde una voz aguda ocuparia un rango de frecuencia alto, mientras que una voz gruesa ocuparia un rango de frecuencias bajas. 
+
+</p>
 
 #### Densidad espectral.
 
@@ -97,45 +54,22 @@ La PSD muestra un pico máximo por debajo de 50 Hz y se va disminuyendo progresi
     return freqs, psd_ch1, psd_ch2`
     
 </p>
-
-
-
-
-
 </p>
 
-### Análisis Estadístico de la Señal
+### Metodos de separacion de fuentes.
 
 <p>
-El análisis estadístico de la señal EMG permite extraer información relevante sobre su comportamiento, lo que es fundamental para diversas aplicaciones biomédicas. Algunos de los aspectos analizados incluyen:
+Para este laboratorio utilizamos el analisis de componentes independiente con el cual separa señales mezcladas en multiples fuentes independientes. el cual usa la tecnica matematica FastICA (optimizacion basada en independencia estadistica), a la salida podemos observar varias señales separadas, donde se observa que corresponde a cada fuente distinta. 
+BEAMFORMING (Singular Value Descomposition) su funcion es mejorar la calida de una señal especifica en presencia de ruido, Analiza valores aplicados a matrices de señales. a la salida se observa una señal optimizada con mejor (SNR).
 </p>
 
-- **La Media:**  De una señal es una medida fundamental que proporciona información sobre el valor promedio de los datos. 
-- **Desviación estándar:** La desviación estándar de una señal es una medida de variabilidad de los datos.
-- **Mediana:** Es el valor que se encuentra en medio de un conjunto de numeros ordenados de menor a mayor, se utiliza para resumir un conjunto de valores en un solo numero.
-  
-![metricas](https://github.com/user-attachments/assets/1567894b-3018-4208-961a-3eed286d741d)
 
-**Implementación en el Código:**
-    `def compute_statistics(signal):
-    stats = {
-        "mean": np.mean(signal, axis=0),
-        "median": np.median(signal, axis=0),
-        "std": np.std(signal, axis=0),
-        "min": np.min(signal, axis=0),
-        "max": np.max(signal, axis=0),}`
 
-**Histograma:** Es una herramienta grafica que nos permite analizar las propiedades estadísticas y visuales de una señal, para su procesamiento y mejora.
-- Visualizar la distribución de amplitudes
-- Identificar características estadísticas
-- Detectar ruido o anomalías
-- Análisis de contraste en imágenes
-- Compresión de datos
-- Diseño de filtros
-
-![histograma](https://github.com/user-attachments/assets/5b75aa83-3ab9-47df-817e-2d77e70bae2e)
-
-El histograma muestra una distribución normal , centra en cero  y con valores positivos y negativos por lo cual podemos inferir que se realizó la transformada de manera correcta.
+### Relacion señal-ruido
+<p>
+La relación señal-ruido es una métrica fundamental en el procesamiento de señales, puesto que permite evaluar la calidad de una señal en presencia de ruido, esta medida  compara la potencia de la señal útil con la potencia del ruido presente en un sistema.
+    
+</p>
 
 ### Requisitos
 <p>
