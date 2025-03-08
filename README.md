@@ -24,14 +24,6 @@ Es necesario utilizar metodos matematicos que nos permitan analizar y separar la
  ### Relacion señal-ruido
 <p>
 La relación señal-ruido es una métrica fundamental en el procesamiento de señales, puesto que permite evaluar la calidad de una señal en presencia de ruido, esta medida  compara la potencia de la señal útil con la potencia del ruido presente en un sistema.
-La formula general para calcular el SNR en Decibelios (dB) es:
-  
-
-
-Donde:
-
-- Pseñal es la potencia de la señal.
-- Pruido es la potencia del ruido.
 
 Se calculo el SNR de cada señal, asi mismo atraves de una función de la librería librosa y el siguiente comando librosa.load(), se identifica la frecuencia de muestreo del audio, posterior al proceso de análisis temporal y espectral (cuyas graficas desarrollaremos mas adelante) y el análisis de componentes independientes, igual a el análisis por Beamforming que permitirán asilar la señal de interés y asi calcular el SNR y comparar el desempeño de separación
 
@@ -108,16 +100,18 @@ Aplicación. La Transformada Rápida de Fourier (FFT) procesa una señal de audi
 #### Densidad espectral.
 
 Mide la distribucion de energia de la señal en funcion de la frecuencia. se espera que nos muestre la contribucion de mas frecuencias en la señal.
+![image](https://github.com/user-attachments/assets/f156da94-59d5-465b-880b-84b886399c30)
+![image](https://github.com/user-attachments/assets/11fb401d-890a-478d-999a-b1fba661ced0)
 
+Ambas señales muestran mayor densidad espectral en las bajas frecuencias (<5000 Hz), lo que sugiere que la mayoría de la energía se encuentra en este rango.
+En la señal de Cediel, se evidencia una caída alrededor de los 15 kHz, lo que nos podria indicar una atenuación en esas frecuencias.
+En la señal de Juany, se evidencia una leve disminusion despues de los 15 kHz, la energía se distribuye de manera continua.
 
+![image](https://github.com/user-attachments/assets/71294add-dafe-455e-b02e-dccba87da654)
+![image](https://github.com/user-attachments/assets/2e4737f3-0305-48a2-b864-f7ac2eed3fb5)
 
+observando la PSD podemos interpretar que la señal Beamforming conserva más energía en altas frecuencias lo que podemos interpretar como una menor pérdida de información.
 
-**Implementación en el Código:**
-
-    `def compute_psd(signal, Fs):
-    freqs, psd_ch1 = welch(signal[:, 0], Fs, nperseg=1024)
-    freqs, psd_ch2 = welch(signal[:, 1], Fs, nperseg=1024)
-    return freqs, psd_ch1, psd_ch2`
     
 </p>
 
@@ -130,9 +124,6 @@ Para este laboratorio utilizamos:
 -El analisis de componentes independiente (ICA): Este metodo separa señales mezcladas en multiples fuentes independientes. el cual usa la tecnica matematica FastICA (optimizacion basada en independencia estadistica), a la salida podemos observar varias señales separadas, donde se observa que corresponde a cada fuente distinta. 
 -Singular Value Descomposition (BEAMFORMING): Su funcion es mejorar la calida de una señal especifica en presencia de ruido, Analiza valores aplicados a matrices de señales. a la salida se observa una señal optimizada con mejor (SNR). En el entorno del laboratorio este metodo permite enfocar la captura de audio hacia una fuente especifica.
 
-
-Beamforming
-![image](https://github.com/user-attachments/assets/d8645396-2185-4a2c-aea5-a8eda78f764b)
 
 **Implementación en el Código:**
   
@@ -175,12 +166,6 @@ sf.write(output_file, beamformed_signal, sr1)`
 `graficar_señal(beamformed_signal, 'Señal después de Beamforming', 'orange')
 graficar_espectro(beamformed_signal, sr1, 'Señal Beamforming', 'orange')
 graficar_psd(beamformed_signal, sr1, 'Señal Beamforming', 'orange')`
-
-
-
-
-ICA
-![image](https://github.com/user-attachments/assets/71e2859d-bbc0-4fc9-899b-18eca6654c47)
 
 `# Aplicar Análisis de Componentes Independientes (ICA)
 ica = FastICA(n_components=2)
@@ -264,9 +249,21 @@ Tener instalado un compilador, que para este caso se utilizo spyder.
 - python Lab2.py
   
 
-### Conclusión
+### Análisis de resultados
 <p>
+Para el análisis de los resultados proporcionados, analizamos los valores de SNR respecto a los originales, los cuales fueron SNR de Cediel: 13.30 dB, lo cual nos habla que tiene una relación señal/ruido moderada, es decir que presenta ruido, sin embargo la señal es reconocible, SNR de Juany: 20.97 dB, esta tiene mejor calidad en comparación la de Cediel, ya que su SNR es mayor, indica que la señal es clara y el ruido no posee un impacto importante, la SNR FINAL después de Beamforming: 10.22 dB esto nos quiere decir que este método no mejoro la señal sino que empeoro, se atribuye a alguna interferencia de los micrófonos, la técnica no fue adecuada respecto a la distribución espacial de las fuentes de sonido ya que ambos celulares tuvieron la misma orientación y no había diferencia entre distancia del colaborador.
+Ademas por parte del análisis de las graficas de beaforming  se observan variaciones en la amplitud, con algunos picos pronunciados, la señal parece haber sido procesada, probablemente mejorando la relación señal-ruido pero no lo suficiente ya que se percibe una especie de eco en el audio final.
+  
+![image](https://github.com/user-attachments/assets/d8645396-2185-4a2c-aea5-a8eda78f764b)
 
+La SNR FINAL después de ICA: 28.53 dB, Esta mejoro significativamente la relación señal / ruido, nos indica que la separación fue buena y la señal resultante es mucho mas limpia que la original, Tambien podemos inferir que esta técnica fue mejor que la técnica de beaforming, separando correctamente las fuentes.
+
+![image](https://github.com/user-attachments/assets/71e2859d-bbc0-4fc9-899b-18eca6654c47)
+
+cuyos resultados se puede evidenciar en los audios finales.
+
+
+  
 </p>
 
 ### Bibliografia
