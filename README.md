@@ -52,6 +52,45 @@ print(f"Frecuencia de muestreo original: {sr} Hz")`
 <p>
 Es la cantidad de muestras tomadas por unidad de tiempo, para convertir una señal análoga a digital. En audio la frecuencia de muestreo determina la precisión del audio digital.
 Según el teorema de Nyquist, la frecuencia de muestreo debe ser al menos el doble de la frecuencia más alta contenida en la señal original. Dado que el oído humano puede percibir sonidos en un rango de 20 Hz a 20.000 Hz, se requiere una frecuencia de muestreo mínima de 40.000 Hz para capturar. para este laboratorio seleccionamos la frecuencia estandar de 44.1 kHz que cumple el teorema de nyquist, esta frecuencia es superior al doble de la frecuencia maxima audible de 20kHz. 
+Por parte de la adquisición para el procesamiento de estas señales se realizo con una frecuencia de muestreo 48kHz, con esta información nos permite también saber que se puede capturar frecuencias de 24kHz, cumpliendo con el criterio de Nyquist para señales de audio, Ademas por tema de la cuantificación se siguió el estándar de los archivos WAV, la cual representa valores flotantes de 32 bits, lo que nos permite asegurar una buena conversión digital.
+
+**Implementación en el Código:**
+
+`audio1, sr1 = librosa.load(r'C:\Users\Usuario\Downloads\Lab3\CedielSeñal.wav',sr=48000)
+audio2, sr2 = librosa.load(r'C:\Users\Usuario\Downloads\Lab3\lab3juanyAmb.wav',sr=48000)
+ruido1, sr3 = librosa.load(r'C:\Users\Usuario\Downloads\Lab3\CedielAmb.wav',sr=48000)
+ruido2, sr4 = librosa.load(r'C:\Users\Usuario\Downloads\Lab3\lab3juanyAmb.wav',sr=48000)`
+
+El tiempo de captura como ya fue mencionado de cada señal fue de 39 a 40 segundos, por lo cual por medio de relleno de ceros (Padding) se igualo ambas señales que nos permitirá mezclar o separación sin perdidas de información. 
+
+`longitud_max = max(len(audio1), len(audio2))
+audio1 = np.pad(audio1, (0, longitud_max - len(audio1)))
+audio2 = np.pad(audio2, (0, longitud_max - len(audio2)))
+audio_mix = np.vstack((audio1, audio2)).T`
+
+El calculo del SNR se calculo antes y despues de aplicar técnicas de procesamiento, como lo son (ICA) Y (BEAMFORMING), con el propósito de evaluar las voces y mejorar la calidad tras la reducción de interferencias y ruido.
+
+`# Calcular la relación señal-ruido (SNR)
+def snr_calculo(señal, ruido):
+    pseñal = np.mean(señal ** 2)
+    pruido = np.mean(ruido ** 2)
+    snr = 10 * np.log10(pseñal / pruido)
+    return snr
+
+snr1 = snr_calculo(audio1, ruido1)
+snr2 = snr_calculo(audio2, ruido2)
+print(f"SNR Cediel: {snr1} dB")
+print(f"SNR Juany: {snr2} dB")`
+
+`# Asegurar que ambas señales de ruido tengan la misma longitud
+longitud_max_ruido = max(len(ruido1), len(ruido2))
+ruido1 = np.pad(ruido1, (0, longitud_max_ruido - len(ruido1)))
+ruido2 = np.pad(ruido2, (0, longitud_max_ruido - len(ruido2)))
+señal_suma = ruido1 + ruido2`
+
+`# Calcular SNR final
+SNR_FINAL_BEAM = snr_calculo(beamformed_signal, señal_suma)
+SNR_FINAL_ICA = snr_calculo(señal_ica, señal_suma)`
 
 </p>
 
