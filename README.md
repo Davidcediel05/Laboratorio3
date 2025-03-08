@@ -199,10 +199,10 @@ Finalmente se calcula el SNR después de beamforming y después de ICA, con el f
 <p>
   
 #### Dominio del tiempo.
--Las señales presentan variaciones de amplitud a lo largo del tiempo, mostrando características propias de cada fuente de audio.
--La señal de Juany tiene mayor variabilidad en amplitud en comparación con la de Cediel, lo que podría indicar diferencias en la 
+- Las señales presentan variaciones de amplitud a lo largo del tiempo, mostrando características propias de cada fuente de audio.
+- La señal de Juany tiene mayor variabilidad en amplitud en comparación con la de Cediel, lo que podría indicar diferencias en la 
  intensidad del sonido o en la presencia de ruido.
--En las muestras se observan fluctuaciones, lo que indica la influencia de interferencias o ruido ambiental.
+- En las muestras se observan fluctuaciones, lo que indica la influencia de interferencias o ruido ambiental.
 
 #### Dominio de la frecuencia.
 - Se utilizaron escalas lineales y logarítmicas, para representar el espectro de las señales. 
@@ -213,9 +213,9 @@ Finalmente se calcula el SNR después de beamforming y después de ICA, con el f
 ![image](https://github.com/user-attachments/assets/eddca05d-8318-43b9-8736-378e49e10859)
 
 #### Dominio del tiempo.
--Las señales iniciales muestran variaciones en su amplitud, influenciadas por el ruido presente.
--La señal después de beamforming evidencia una reducción del ruido, al mejorar la alineación de las fuentes de interés.
--La señal tras ICA logra una separación efectiva de componentes, reduciendo aún más la interferencia y resaltando patrones más claros.
+- Las señales iniciales muestran variaciones en su amplitud, influenciadas por el ruido presente.
+- La señal después de beamforming evidencia una reducción del ruido, al mejorar la alineación de las fuentes de interés.
+- La señal tras ICA logra una separación efectiva de componentes, reduciendo aún más la interferencia y resaltando patrones más claros.
 
 #### Dominio de la frecuencia.
 - En el espectro lineal, tanto la señal de beamforming como la de ICA tienen componentes de baja frecuencia.
