@@ -13,12 +13,10 @@ audio de cada una de las voces capturadas.
 Para este laboratorio el objetivo es recrear el problema de la fiesta de coctel, donde existen 2 fuentes sonoras capturadas por un arreglo de 2 micrófonos, en este caso, de acuerdo con la siguiente metodología. Se conectaron dos microfonos del celular los cuales fueron distribuidos verticalmente a 3 metros de los colaboradores, los colaboradores se encontraban mirándose de frente, simulando una conversación tipo coctel. Dichas grabaciones cuentan con 10 segundos de ruido del espacio insonoro y 39 seg de grabación dentro de la conversación.
 Es necesario utilizar metodos matematicos que nos permitan analizar y separar la señal, utilizaremos el analisis de componentes independientes para eliminar las interferencias entre las voces, la tecnica de Beamforing que mejora la calidad de la señal en un entorno ruidoso y  para el analisis usamos las transformadas de furier. 
 
+![image](https://github.com/user-attachments/assets/d1b09ffb-6834-49d8-b450-d92470a3362a)
+![image](https://github.com/user-attachments/assets/879d1e41-1746-4c05-ad1a-fb205e03bf7d)
 
 
-![image](https://github.com/user-attachments/assets/e8ce2271-451f-46d8-9f16-cda9e2514b6f)
-![image](https://github.com/user-attachments/assets/15929288-a337-4320-8857-eb3b36093d80)
-![image](https://github.com/user-attachments/assets/e648a271-34e9-4348-b478-4c9c8f7f74c9)
-![image](https://github.com/user-attachments/assets/b1d5f438-ea70-4d00-8c54-5c6f74fe1846)
 
 
 </p>
@@ -75,9 +73,8 @@ def snr_calculo(señal, ruido):
     pseñal = np.mean(señal ** 2)
     pruido = np.mean(ruido ** 2)
     snr = 10 * np.log10(pseñal / pruido)
-    return snr
-
-snr1 = snr_calculo(audio1, ruido1)
+    return snr`
+`snr1 = snr_calculo(audio1, ruido1)
 snr2 = snr_calculo(audio2, ruido2)
 print(f"SNR Cediel: {snr1} dB")
 print(f"SNR Juany: {snr2} dB")`
@@ -113,10 +110,6 @@ Aplicación. La Transformada Rápida de Fourier (FFT) procesa una señal de audi
 
 Mide la distribucion de energia de la señal en funcion de la frecuencia. se espera que nos muestre la contribucion de mas frecuencias en la señal.
 
-![image](https://github.com/user-attachments/assets/3003a4f3-d27c-49f3-8ec8-e4eed159857c)
-![image](https://github.com/user-attachments/assets/bdb36bcf-adaf-4599-804f-ea88ede95df8)
-![image](https://github.com/user-attachments/assets/a0bd1be3-d302-4f52-9d2a-64f390d6ca54)
-![image](https://github.com/user-attachments/assets/52c23999-a88e-46bc-a20b-cc1a525f3ab8)
 
 
 
@@ -138,17 +131,101 @@ Para este laboratorio utilizamos:
 -Singular Value Descomposition (BEAMFORMING): Su funcion es mejorar la calida de una señal especifica en presencia de ruido, Analiza valores aplicados a matrices de señales. a la salida se observa una señal optimizada con mejor (SNR). En el entorno del laboratorio este metodo permite enfocar la captura de audio hacia una fuente especifica.
 
 Beamforming
-![image](https://github.com/user-attachments/assets/d0fed6f2-efcb-499e-ac92-c42f157d2122)
-![image](https://github.com/user-attachments/assets/ecc4de1a-0d69-4a1b-b8f3-95ef3c830b51)
+![image](https://github.com/user-attachments/assets/d8645396-2185-4a2c-aea5-a8eda78f764b)
+
+**Implementación en el Código:**
+  
+    `# Beamforming
+def calcular_retraso(distancias, velocidad, sr):
+    return tuple(int(d / velocidad * sr) for d in distancias)`
+
+`distancias = [0, 3.0]  # Distancia entre micrófonos en metros
+velocidad_sonido = 343  # Velocidad del sonido en m/s
+retraso = calcular_retraso(distancias, velocidad_sonido, sr1)`
+
+
+Donde para hallar el retraso, debemos tener en cuenta la distancia, la velocidad de sonido, cabe resaltar que la velocidad se halla a través de esta fórmula, v=331.3+0.606⋅T donde la temperatura del salón era de 20c° el día de grabación, por parte de las distancias, ambos micrófonos están a 3 metros, por lo tanto, el cálculo del retraso se da por 
+Retraso=3433.0×48000=419.5 muestras
+Esto nos esta diciendo que el micrófono recibirá la señal con 419 muestras de diferencia respeto a la original 
+Posterior a eso.
+
+`def beamforming(signals, delay):
+    num_mics = signals.shape[1]
+    beamformed_signal = np.zeros(len(signals))
+    for i, delay_i in enumerate(delay):
+        beamformed_signal += np.roll(signals[:, i], -delay_i)
+    return beamformed_signal / num_mics`
+
+Lo subrayado nos ayuda a desplazar la señal en el tiempo de acuerdo con el retraso, lo cual compensa el retardo de la señal del segundo micrófono, Después de corregir los retrasos, se promedian las señales de los micrófonos para obtener la señal final.
+
+`# Asegurar que ambas señales tengan la misma longitud
+longitud_max = max(len(audio1), len(audio2))
+audio1 = np.pad(audio1, (0, longitud_max - len(audio1)))
+audio2 = np.pad(audio2, (0, longitud_max - len(audio2)))
+audio_mix = np.vstack((audio1, audio2)).T`
+
+Se ajustan las señales a la misma longitud para poder procesarlas juntas, posterior a eso se guarda la señal filtrada y el audio correspondiente.
+
+`# Aplicar beamforming
+beamformed_signal = beamforming(audio_mix, retraso)
+output_file = r'C:\Users\Usuario\Downloads\Lab3\señal_beamformed.wav'
+sf.write(output_file, beamformed_signal, sr1)`
+
+`graficar_señal(beamformed_signal, 'Señal después de Beamforming', 'orange')
+graficar_espectro(beamformed_signal, sr1, 'Señal Beamforming', 'orange')
+graficar_psd(beamformed_signal, sr1, 'Señal Beamforming', 'orange')`
+
+
+
 
 ICA
-![image](https://github.com/user-attachments/assets/eebb1aec-cdd8-470c-a910-390d56ebab91)
-![image](https://github.com/user-attachments/assets/1efd8f4d-a114-457d-8504-e972bf300e54)
+![image](https://github.com/user-attachments/assets/71e2859d-bbc0-4fc9-899b-18eca6654c47)
 
+`# Aplicar Análisis de Componentes Independientes (ICA)
+ica = FastICA(n_components=2)
+señales_separadas = ica.fit_transform(audio_mix)
+señal_ica = señales_separadas[:, 0]`
+
+Ica nos permite encontrar fuentes independientes en señales mezcladas, es decir separa señales superpuestas
+Finalmente se calcula el SNR después de beamforming y después de ICA, con el fin de comparar que método nos ayude a reducir el ruido y mejorar la señal
 
 
 </p>
 
+
+### Analisis temporal y frecuencial de las señales.
+
+<p>
+  
+#### Dominio del tiempo.
+-Las señales presentan variaciones de amplitud a lo largo del tiempo, mostrando características propias de cada fuente de audio.
+-La señal de Juany tiene mayor variabilidad en amplitud en comparación con la de Cediel, lo que podría indicar diferencias en la 
+ intensidad del sonido o en la presencia de ruido.
+-En las muestras se observan fluctuaciones, lo que indica la influencia de interferencias o ruido ambiental.
+
+#### Dominio de la frecuencia.
+- Se utilizaron escalas lineales y logarítmicas, para representar el espectro de las señales. 
+- En el espectro lineal, se identifican picos dominantes en bajas frecuencias, lo que muestra la mayor parte de la energía concentrada en componentes graves.
+- El espectro logarítmico se visualiza las diferencias en niveles de energía en distintas bandas de frecuencia, donde se destaca la presencia de ruido en altas frecuencias.
+
+![image](https://github.com/user-attachments/assets/3aea22ea-760e-4564-af04-aaf41beb1e90)
+![image](https://github.com/user-attachments/assets/eddca05d-8318-43b9-8736-378e49e10859)
+
+#### Dominio del tiempo.
+-Las señales iniciales muestran variaciones en su amplitud, influenciadas por el ruido presente.
+-La señal después de beamforming evidencia una reducción del ruido, al mejorar la alineación de las fuentes de interés.
+-La señal tras ICA logra una separación efectiva de componentes, reduciendo aún más la interferencia y resaltando patrones más claros.
+
+#### Dominio de la frecuencia.
+- En el espectro lineal, tanto la señal de beamforming como la de ICA tienen componentes de baja frecuencia.
+- En el espectro logarítmico, ICA muestra una distribución más uniforme en altas frecuencias, mostrando una mejor preservación del contenido espetral.
+- Beamforming atenuó algunas frecuencias,logrando una señal más enfocada, pero ICA obtuvo una mayor mejora en la SNR.
+
+![image](https://github.com/user-attachments/assets/defc5ea7-9826-4d82-96ee-2a34de3196b7)
+![image](https://github.com/user-attachments/assets/662612e4-d1bb-4456-9d5b-7daf0283e43a)
+
+
+</p>
 
 
 
