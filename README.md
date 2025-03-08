@@ -100,7 +100,9 @@ Aplicación. La Transformada Rápida de Fourier (FFT) procesa una señal de audi
 #### Densidad espectral.
 
 Mide la distribucion de energia de la señal en funcion de la frecuencia. se espera que nos muestre la contribucion de mas frecuencias en la señal.
+
 ![image](https://github.com/user-attachments/assets/f156da94-59d5-465b-880b-84b886399c30)
+
 ![image](https://github.com/user-attachments/assets/11fb401d-890a-478d-999a-b1fba661ced0)
 
 Ambas señales muestran mayor densidad espectral en las bajas frecuencias (<5000 Hz), lo que sugiere que la mayoría de la energía se encuentra en este rango.
@@ -108,6 +110,7 @@ En la señal de Cediel, se evidencia una caída alrededor de los 15 kHz, lo que 
 En la señal de Juany, se evidencia una leve disminusion despues de los 15 kHz, la energía se distribuye de manera continua.
 
 ![image](https://github.com/user-attachments/assets/71294add-dafe-455e-b02e-dccba87da654)
+
 ![image](https://github.com/user-attachments/assets/2e4737f3-0305-48a2-b864-f7ac2eed3fb5)
 
 observando la PSD podemos interpretar que la señal Beamforming conserva más energía en altas frecuencias lo que podemos interpretar como una menor pérdida de información.
@@ -195,6 +198,7 @@ Finalmente se calcula el SNR después de beamforming y después de ICA, con el f
 - El espectro logarítmico se visualiza las diferencias en niveles de energía en distintas bandas de frecuencia, donde se destaca la presencia de ruido en altas frecuencias.
 
 ![image](https://github.com/user-attachments/assets/3aea22ea-760e-4564-af04-aaf41beb1e90)
+
 ![image](https://github.com/user-attachments/assets/eddca05d-8318-43b9-8736-378e49e10859)
 
 #### Dominio del tiempo.
@@ -208,6 +212,7 @@ Finalmente se calcula el SNR después de beamforming y después de ICA, con el f
 - Beamforming atenuó algunas frecuencias,logrando una señal más enfocada, pero ICA obtuvo una mayor mejora en la SNR.
 
 ![image](https://github.com/user-attachments/assets/defc5ea7-9826-4d82-96ee-2a34de3196b7)
+
 ![image](https://github.com/user-attachments/assets/662612e4-d1bb-4456-9d5b-7daf0283e43a)
 
 
