@@ -103,7 +103,6 @@ Esta transformación es una herramienta crucial para analizar y manipular el con
 Aplicación. La Transformada Rápida de Fourier (FFT) procesa una señal de audio en el dominio del tiempo, donde se representa la amplitud de la onda sonora a lo largo del tiempo, y la transforma en el dominio de la frecuencia. Esto permite visualizar la intensidad de cada componente de frecuencia presente en la señal original, es decir, identificar qué frecuencias conforman el sonido. En el caso del laboratorio, donde se analizan dos fuentes con diferentes timbres de voz, la FFT permite reconocer los rangos de frecuencia característicos de cada tipo de voz, donde una voz aguda ocuparia un rango de frecuencia alto, mientras que una voz gruesa ocuparia un rango de frecuencias bajas. 
 </p>
 
-**Implementación en el Código:**
 
 
 #### Densidad espectral.
@@ -114,6 +113,7 @@ Mide la distribucion de energia de la señal en funcion de la frecuencia. se esp
 
 
 **Implementación en el Código:**
+
     `def compute_psd(signal, Fs):
     freqs, psd_ch1 = welch(signal[:, 0], Fs, nperseg=1024)
     freqs, psd_ch2 = welch(signal[:, 1], Fs, nperseg=1024)
@@ -129,6 +129,7 @@ Mide la distribucion de energia de la señal en funcion de la frecuencia. se esp
 Para este laboratorio utilizamos:
 -El analisis de componentes independiente (ICA): Este metodo separa señales mezcladas en multiples fuentes independientes. el cual usa la tecnica matematica FastICA (optimizacion basada en independencia estadistica), a la salida podemos observar varias señales separadas, donde se observa que corresponde a cada fuente distinta. 
 -Singular Value Descomposition (BEAMFORMING): Su funcion es mejorar la calida de una señal especifica en presencia de ruido, Analiza valores aplicados a matrices de señales. a la salida se observa una señal optimizada con mejor (SNR). En el entorno del laboratorio este metodo permite enfocar la captura de audio hacia una fuente especifica.
+
 
 Beamforming
 ![image](https://github.com/user-attachments/assets/d8645396-2185-4a2c-aea5-a8eda78f764b)
