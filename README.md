@@ -10,7 +10,10 @@ audio de cada una de las voces capturadas.
 
 ### Procedimiento.
 <p>
-Para realizar este laboratorio es necesario utilizar metodos matematicos que nos permitan analizar y separar la señal, teniendo en cuenta que son dos microfonos a 3 metros de distancia entre si y a 1.5 metros de donde proviene la voz, utilizaremos el analisis de componentes independientes para eliminar las interferencias entre las voces, la tecnica de Beamforing que mejora la calidad de la señal en un entorno ruidoso y  para el analisis usamos las transformadas de furier. 
+Para este laboratorio el objetivo es recrear el problema de la fiesta de coctel, donde existen 2 fuentes sonoras capturadas por un arreglo de 2 micrófonos, en este caso, de acuerdo con la siguiente metodología. Se conectaron dos microfonos del celular los cuales fueron distribuidos verticalmente a 3 metros de los colaboradores, los colaboradores se encontraban mirándose de frente, simulando una conversación tipo coctel. Dichas grabaciones cuentan con 10 segundos de ruido del espacio insonoro y 39 seg de grabación dentro de la conversación.
+Es necesario utilizar metodos matematicos que nos permitan analizar y separar la señal, utilizaremos el analisis de componentes independientes para eliminar las interferencias entre las voces, la tecnica de Beamforing que mejora la calidad de la señal en un entorno ruidoso y  para el analisis usamos las transformadas de furier. 
+
+
 
 ![image](https://github.com/user-attachments/assets/e8ce2271-451f-46d8-9f16-cda9e2514b6f)
 ![image](https://github.com/user-attachments/assets/15929288-a337-4320-8857-eb3b36093d80)
@@ -25,12 +28,23 @@ Para realizar este laboratorio es necesario utilizar metodos matematicos que nos
 La relación señal-ruido es una métrica fundamental en el procesamiento de señales, puesto que permite evaluar la calidad de una señal en presencia de ruido, esta medida  compara la potencia de la señal útil con la potencia del ruido presente en un sistema.
 La formula general para calcular el SNR en Decibelios (dB) es:
   
-![image](https://github.com/user-attachments/assets/15e73e7e-f518-4bd5-b48d-7494a2e2c084)
+
 
 Donde:
 
 - Pseñal es la potencia de la señal.
 - Pruido es la potencia del ruido.
+
+Se calculo el SNR de cada señal, asi mismo atraves de una función de la librería librosa y el siguiente comando librosa.load(), se identifica la frecuencia de muestreo del audio, posterior al proceso de análisis temporal y espectral (cuyas graficas desarrollaremos mas adelante) y el análisis de componentes independientes, igual a el análisis por Beamforming que permitirán asilar la señal de interés y asi calcular el SNR y comparar el desempeño de separación
+
+![image](https://github.com/user-attachments/assets/4d15dde4-3835-419e-b3d5-2d3f4f4437f1)
+
+**Implementación en el Código:**
+
+`import librosa
+archivo = r"C:\Users\juany\OneDrive\Escritorio\LabSeñales\Lab3\CedielSeñal.wav"  # Nombre del archivo
+_, sr = librosa.load(archivo, sr=None)  # Carga sin modificar la frecuencia
+print(f"Frecuencia de muestreo original: {sr} Hz")`
 
 </p>
 
@@ -39,7 +53,6 @@ Donde:
 Es la cantidad de muestras tomadas por unidad de tiempo, para convertir una señal análoga a digital. En audio la frecuencia de muestreo determina la precisión del audio digital.
 Según el teorema de Nyquist, la frecuencia de muestreo debe ser al menos el doble de la frecuencia más alta contenida en la señal original. Dado que el oído humano puede percibir sonidos en un rango de 20 Hz a 20.000 Hz, se requiere una frecuencia de muestreo mínima de 40.000 Hz para capturar. para este laboratorio seleccionamos la frecuencia estandar de 44.1 kHz que cumple el teorema de nyquist, esta frecuencia es superior al doble de la frecuencia maxima audible de 20kHz. 
 
-![image](https://github.com/user-attachments/assets/c0f32c08-062f-40ae-9e01-c9c2f7dad579)
 </p>
 
 #### Transformada de Fourier.
