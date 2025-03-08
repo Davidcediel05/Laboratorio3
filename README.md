@@ -218,7 +218,23 @@ Finalmente se calcula el SNR después de beamforming y después de ICA, con el f
 
 </p>
 
+### Análisis de resultados
+<p>
+Para el análisis de los resultados proporcionados, analizamos los valores de SNR respecto a los originales, los cuales fueron SNR de Cediel: 13.30 dB, lo cual nos habla que tiene una relación señal/ruido moderada, es decir que presenta ruido, sin embargo la señal es reconocible, SNR de Juany: 20.97 dB, esta tiene mejor calidad en comparación la de Cediel, ya que su SNR es mayor, indica que la señal es clara y el ruido no posee un impacto importante, la SNR FINAL después de Beamforming: 10.22 dB esto nos quiere decir que este método no mejoro la señal sino que empeoro, se atribuye a alguna interferencia de los micrófonos, la técnica no fue adecuada respecto a la distribución espacial de las fuentes de sonido ya que ambos celulares tuvieron la misma orientación y no había diferencia entre distancia del colaborador.
+Ademas por parte del análisis de las graficas de beaforming  se observan variaciones en la amplitud, con algunos picos pronunciados, la señal parece haber sido procesada, probablemente mejorando la relación señal-ruido pero no lo suficiente ya que se percibe una especie de eco en el audio final.
+  
+![image](https://github.com/user-attachments/assets/d8645396-2185-4a2c-aea5-a8eda78f764b)
 
+La SNR FINAL después de ICA: 28.53 dB, Esta mejoro significativamente la relación señal / ruido, nos indica que la separación fue buena y la señal resultante es mucho mas limpia que la original, Tambien podemos inferir que esta técnica fue mejor que la técnica de beaforming, separando correctamente las fuentes.
+
+![image](https://github.com/user-attachments/assets/71e2859d-bbc0-4fc9-899b-18eca6654c47)
+
+cuyos resultados se puede evidenciar en los audios finales.
+
+"C:\Users\Usuario\Downloads\Lab3JJ\señal_beamformed.wav"
+"C:\Users\Usuario\Downloads\Lab3JJ\señal_ica.wav"
+  
+</p>
 
 ### Requisitos
 <p>
@@ -254,23 +270,6 @@ Tener instalado un compilador, que para este caso se utilizo spyder.
 - python Lab2.py
   
 
-### Análisis de resultados
-<p>
-Para el análisis de los resultados proporcionados, analizamos los valores de SNR respecto a los originales, los cuales fueron SNR de Cediel: 13.30 dB, lo cual nos habla que tiene una relación señal/ruido moderada, es decir que presenta ruido, sin embargo la señal es reconocible, SNR de Juany: 20.97 dB, esta tiene mejor calidad en comparación la de Cediel, ya que su SNR es mayor, indica que la señal es clara y el ruido no posee un impacto importante, la SNR FINAL después de Beamforming: 10.22 dB esto nos quiere decir que este método no mejoro la señal sino que empeoro, se atribuye a alguna interferencia de los micrófonos, la técnica no fue adecuada respecto a la distribución espacial de las fuentes de sonido ya que ambos celulares tuvieron la misma orientación y no había diferencia entre distancia del colaborador.
-Ademas por parte del análisis de las graficas de beaforming  se observan variaciones en la amplitud, con algunos picos pronunciados, la señal parece haber sido procesada, probablemente mejorando la relación señal-ruido pero no lo suficiente ya que se percibe una especie de eco en el audio final.
-  
-![image](https://github.com/user-attachments/assets/d8645396-2185-4a2c-aea5-a8eda78f764b)
-
-La SNR FINAL después de ICA: 28.53 dB, Esta mejoro significativamente la relación señal / ruido, nos indica que la separación fue buena y la señal resultante es mucho mas limpia que la original, Tambien podemos inferir que esta técnica fue mejor que la técnica de beaforming, separando correctamente las fuentes.
-
-![image](https://github.com/user-attachments/assets/71e2859d-bbc0-4fc9-899b-18eca6654c47)
-
-cuyos resultados se puede evidenciar en los audios finales.
-
-"C:\Users\Usuario\Downloads\Lab3JJ\señal_beamformed.wav"
-"C:\Users\Usuario\Downloads\Lab3JJ\señal_ica.wav"
-  
-</p>
 
 ### Bibliografia
 
