@@ -262,7 +262,8 @@ La SNR FINAL después de ICA: 28.53 dB, Esta mejoro significativamente la relaci
 
 cuyos resultados se puede evidenciar en los audios finales.
 
-
+"C:\Users\Usuario\Downloads\Lab3JJ\señal_beamformed.wav"
+"C:\Users\Usuario\Downloads\Lab3JJ\señal_ica.wav"
   
 </p>
 
